@@ -1,7 +1,9 @@
 package Maze;
 
+
+
 public class Board{
-    private int[][] board;
+    private Cell[][] board;
     private int xSize;
     private int ySize;
 
@@ -11,64 +13,26 @@ public class Board{
         this.xSize = xSize;
         this.ySize = ySize;
 
-        board = new int[xSize][ySize];
+        board = new Cell[xSize][ySize];
         //fill boards with e 
         // e = empty
         // w = wall
+        for(int x = 0; x < xSize; x++) {
+        	 for(int y = 0; y < ySize; y++) {
+        		 Cell cell = new Cell(x,y,board,xSize,ySize);
+        		 board[x][y] = cell;
+             }
+        }
     }
-
-    // this will take start and end coordinates which should
-    // be in a strait line. The coordinates indicate a wall
     
-
-    //this will print out the board
-   /*
-    public void displayBoard(){
-        for (int i = 0; i <= xSize; i++){
-            for (int y = 0; y <= ySize; y++){
-                System.out.print(board[i][y]+", ");
-            }
-            System.out.println("");
-        }
-    } */
-
-    public void clearboard(){
-        // makes an empty new board
-        for (int i = 0; i< xSize; i++){
-            for (int y= 0; y < ySize; y++ ){
-                board [i][y] = 0;
-            }
-        }
-    }
-
-    public void setBoard(int [] arr1, int [] arr2) throws Exception{
-        // takes a start and end coordinate and will
-        // make a line wall in between those points
-        // they are arrays of size 2
-        int a = 0;
-        if (arr1.length != 2 || arr2.length != 2){
-            throw new Exception("non valid coordinates");
-            
-        }
-
-        
-    }
-    @Override
-    public String toString(){
+    public String toString() {
     	String a = "";
-        for (int i = 0; i< xSize; i++){
-            for (int y= 0; y < ySize; y++ ){
-                a += board [i][y] + " ";
-            }
-            a += "\n";
-        }
-
-
-
-        return a;
-    }
-
-    public int[][] getboard(){
-        return board;
+    	for(int x = 0; x < xSize; x++) {
+       	 	for(int y = 0; y < ySize; y++) {
+       		 a += board[x][y].wall.size() + " ";
+       	 	}
+       	 	a+= "\n";
+    	}
+    	return a;
     }
 }
