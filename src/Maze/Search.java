@@ -58,46 +58,30 @@ public class Search {
 			stack.pop();
 		}	
 		
+		if (row < xSize && maze.getCell(row+1, col).visited != true&&
+				curr.wall.get("bottom") == false) {
+			maze.getCell(row+1, col).visited = true;
+			maze.getCell(row+1, col).parent = curr;
+			stack.push(maze.getCell(row, col));
+			if (solveDFSMaze(maze, maze.getCell(row+1, col), end)) return true;
+			stack.pop();
+		}	
+		
+		if (col < 0 && maze.getCell(row, col-1).visited != true&&
+				curr.wall.get("left") == false) {
+			maze.getCell(row, col-1).visited = true;
+			maze.getCell(row, col-1).parent = curr;
+			stack.push(maze.getCell(row, col));
+			if (solveDFSMaze(maze, maze.getCell(row, col-1), end)) return true;
+			stack.pop();
+		}	
+		
 		return false;
 	}
-	/*
-	
-	public static Stack<Cell> solveDFSMaze(Board maze, Cell start, Cell end) {
-		Stack<Cell> stack = new Stack<Cell>();
-		start.visited = true;
-		Cell curr = null;
-		stack.push(start);
-		while (!stack.empty()) {
-			curr = stack.pop();
-			int col = curr.col;
-			int row = curr.row;
-			
-			
-			if (curr == end) { 
-				stack.push(curr);
-				return stack;
-			}
-			//up 1
-			if (row > 0 && maze.getCell(row-1, col).visited != true&&
-					curr.wall.get("top") == false) {
-				maze.getCell(row-1, col).visited = true;
-				maze.getCell(row-1, col).parent = curr;
-				stack.push(maze.getCell(row, col));
-				stack.push(maze.getCell(row -1, col));
-			}	
-			if (col < ySize-1 && maze.getCell(row, col+1).visited != true&&
-					curr.wall.get("right") == false) {
-				maze.getCell(row, col+1).visited = true;
-				maze.getCell(row, col+1).parent = curr;
-				stack.push(maze.getCell(row, col));
-				stack.push(maze.getCell(row, col+1));
-			}	
-		}
-		return stack;
-	}*/
 	
 	public static void main (String args[]) {
-		
+		//x is rows
+		//y is cols
 		//Temp values until reader is done
 		xSize = 4;
 		ySize = 4;
@@ -115,7 +99,7 @@ public class Search {
 		solveDFSMaze(b, b.getCell(3, 0),b.getCell(1, 2));
 		
 		Stack<Cell> a = stack;
-		 int i =0;
+		int i =0;
 		
 	}
 
